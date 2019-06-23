@@ -12,6 +12,11 @@ public class ResultView : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI totalQuset = null;
 
+    public void Reset()
+    {
+        totalQuset.text = $"Quest\n{ProgressManager.Instance.QuestionIndex} / {ProgressManager.Instance.Data.GetQuestMax()}";
+        heart.rectTransform.DOSizeDelta(new Vector2(48, 16), 0.5f);
+    }
 
     private void OnEnable()
     {
@@ -35,12 +40,12 @@ public class ResultView : MonoBehaviour
     void OnChangeQuestion()
     {
         totalQuset.text = $"Quest\n{ProgressManager.Instance.QuestionIndex} / {ProgressManager.Instance.Data.GetQuestMax()}";
-        totalQuset.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f);
-
+        totalQuset.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f).OnComplete(() => totalQuset.rectTransform.localScale = Vector3.one);
     }
 
     void OnMissAnswer()
     {
         heart.rectTransform.DOSizeDelta(heart.rectTransform.sizeDelta - new Vector2(16, 0), 0.5f);
     }
+
 }

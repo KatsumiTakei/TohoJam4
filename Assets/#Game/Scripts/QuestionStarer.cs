@@ -8,47 +8,47 @@ public class QuestionStarer : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI text = null;
 
+    [SerializeField]
+    bool PlayOnAwake = true;
+
+
+    [SerializeField]
+    GameObject [] resultUi = null;
 
     WaitForSeconds wait02 = new WaitForSeconds(0.2f);
     WaitForSeconds wait05 = new WaitForSeconds(0.5f);
 
-    //public IEnumerator Start()
-    //{
-    //    yield return OnClickStartQuest();
-    //}
+    IEnumerator Start()
+    {
+        if (PlayOnAwake)
+            yield return CoStartQuest();
+    }
 
     public void Reset()
     {
         text.color = new Color(0.75f, 0.75f, 0.75f);
         text.rectTransform.localScale = new Vector3(1, 1, 1);
         text.rectTransform.anchoredPosition = new Vector2(25, 25);
-        text.fontSize = 96;
+        text.fontSize = 76;
         text.text = "Ready";
     }
 
     private void OnEnable()
     {
         EventManager.OnGameResult += OnGameResult;
-        //EventManager.OnChangeQuestion += OnChangeQuestion;
     }
 
     private void OnDisable()
     {
         EventManager.OnGameResult -= OnGameResult;
-        //EventManager.OnChangeQuestion -= OnChangeQuestion;
     }
 
-    //void OnChangeQuestion()
-    //{
-    //    Reset();
+    public void OnClickStartQuest()
+    {
+        StartCoroutine(CoStartQuest());
+    }
 
-    //    text.text = "Correct!";
-    //    text.color = Color.yellow;
-    //    text.DOFade(0, 0.5f);
-    //    text.rectTransform.DOScale(1.5f, 0.5f);
-    //}
-
-    public IEnumerator OnClickStartQuest()
+    IEnumerator CoStartQuest()
     {
 
         Reset();
@@ -81,6 +81,7 @@ public class QuestionStarer : MonoBehaviour
     void OnGameResult(bool result)
     {
         Reset();
+        OnClickResultButton(true);
         if (result)
         {
             text.color = Color.yellow;
@@ -90,6 +91,14 @@ public class QuestionStarer : MonoBehaviour
         {
             text.text = "Game over...";
             text.fontSize = 48;
+        }
+    }
+
+    public void OnClickResultButton(bool active)
+    {
+        foreach(var ui in resultUi)
+        {
+            ui.SetActive(active);
         }
     }
 }

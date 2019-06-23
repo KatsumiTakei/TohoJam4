@@ -1,8 +1,6 @@
 ﻿using DG.Tweening;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine;
 
 public class TimerView : MonoBehaviour
 {
@@ -30,13 +28,13 @@ public class TimerView : MonoBehaviour
     public void Reset(float currentTime)
     {
         OnChangeTime(currentTime);
-        text.color = Color.white;
+        text.color = new Color(0.75f, 0.75f, 0.75f);
     }
 
     void OnChangeQuestion()
     {
         Reset(5.0f);
-        text.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.5f);
+        text.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f).OnComplete(() => text.rectTransform.localScale = Vector3.one);
     }
 
     void OnChangeTime(float currentTime)
@@ -53,7 +51,7 @@ public class TimerView : MonoBehaviour
     void ChangeColorText(float currentTime)
     {
         int second = Mathf.FloorToInt(currentTime);
-        if(second == 2)
+        if (second == 2)
         {
             text.color = Color.yellow;
         }

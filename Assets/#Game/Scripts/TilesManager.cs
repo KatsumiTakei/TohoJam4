@@ -13,6 +13,9 @@ public class TilesManager : UnityDLL.SingletonMonoBehaviour<TilesManager>
         HideAll();
         switch (placementType)
         {
+            case ePlacementType.Any:
+                Debug.LogWarning("fall throw ePlacementType Any");
+                break;
             case ePlacementType.Random:
                 PlacementTile((ePlacementType)Random.Range(1, 7));
                 break;
@@ -48,7 +51,7 @@ public class TilesManager : UnityDLL.SingletonMonoBehaviour<TilesManager>
         }
     }
 
-    void HideAll()
+    public void HideAll()
     {
         for (int i = 0;i < Tiles.Length; i++)
         {

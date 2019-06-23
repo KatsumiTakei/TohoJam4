@@ -10,11 +10,6 @@ public class Questioner : MonoBehaviour
     private void Start()
     {
         view = GetComponent<QuestionView>();
-
-        //var exportData = new QuestionData();
-        //exportData.impl.Add(new QuestionData.ImplQuestionData(eInputType.Any, eTileType.White, eDirectionType.None));
-        //JsonManager.ToJson(Constant.TutorialData, exportData);
-
         ProgressManager.Instance.Data = JsonManager.FromJson<QuestionData>(Constant.TutorialData);
     }
 

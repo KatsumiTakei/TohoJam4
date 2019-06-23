@@ -37,7 +37,7 @@
             "placement" : 5
         },
         {
-            "input": 2,
+            "input": 1,
             "tile": 1,
             "direction": 4,
             "placement" : 6
@@ -49,7 +49,7 @@
             "placement" : 6
         },
         {
-            "input": 2,
+            "input": 1,
             "tile": 1,
             "direction": 4,
             "placement" : 7

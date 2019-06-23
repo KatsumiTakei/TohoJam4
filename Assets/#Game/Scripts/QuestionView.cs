@@ -116,12 +116,12 @@ public class QuestionView : MonoBehaviour
         var actives = Imgs.FindAll(img => img.isActiveAndEnabled);
         foreach (var img in actives)
         {
-            img.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2);
+            img.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2).OnComplete(() => img.rectTransform.localScale = Vector3.one);
         }
 
     }
 
-    void HideAll()
+    public void HideAll()
     {
         DrawQuest(eTileType.None, eInputType.Any, eDirectionType.None);
     }
