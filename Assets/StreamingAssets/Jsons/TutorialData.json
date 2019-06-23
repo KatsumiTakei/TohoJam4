@@ -1,0 +1,65 @@
+﻿{
+    "impl": [
+        {
+            "input": 0,
+            "tile": 1,
+            "direction": 0,
+            "placement" : 1
+        },
+        {
+            "input": 0,
+            "tile": 2,
+            "direction": 0,
+            "placement" : 1
+        },
+        {
+            "input": 1,
+            "tile": 1,
+            "direction": 0,
+            "placement" : 1
+        },
+        {
+            "input": 2,
+            "tile": 1,
+            "direction": 0,
+            "placement" : 1
+        },
+        {
+            "input": 1,
+            "tile": 1,
+            "direction": 1,
+            "placement" : 5
+        },
+        {
+            "input": 1,
+            "tile": 2,
+            "direction": 2,
+            "placement" : 5
+        },
+        {
+            "input": 1,
+            "tile": 1,
+            "direction": 4,
+            "placement" : 6
+        },
+        {
+            "input": 1,
+            "tile": 2,
+            "direction": 3,
+            "placement" : 6
+        },
+        {
+            "input": 1,
+            "tile": 1,
+            "direction": 4,
+            "placement" : 7
+        },
+        {
+            "input": 1,
+            "tile": 2,
+            "direction": 2,
+            "placement" : 7
+        }
+        
+    ]
+}

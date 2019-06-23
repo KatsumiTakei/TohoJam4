@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -15,12 +15,14 @@ public class TimerView : MonoBehaviour
 
     void OnEnable()
     {
+        EventManager.OnChangeQuestion += OnChangeQuestion;
         EventManager.OnChangeTime += OnChangeTime;
         EventManager.OnTimeup += OnTimeup;
     }
 
     void OnDisable()
     {
+        EventManager.OnChangeQuestion -= OnChangeQuestion;
         EventManager.OnChangeTime -= OnChangeTime;
         EventManager.OnTimeup -= OnTimeup;
     }
@@ -31,15 +33,34 @@ public class TimerView : MonoBehaviour
         text.color = Color.white;
     }
 
+    void OnChangeQuestion()
+    {
+        Reset(5.0f);
+        text.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.5f);
+    }
+
     void OnChangeTime(float currentTime)
     {
         text.text = ConvertSpecifiedFormat(currentTime);
+        ChangeColorText(currentTime);
     }
 
     void OnTimeup()
     {
-        text.color = Color.red;
         text.text = "00:00";
+    }
+
+    void ChangeColorText(float currentTime)
+    {
+        int second = Mathf.FloorToInt(currentTime);
+        if(second == 2)
+        {
+            text.color = Color.yellow;
+        }
+        if (second == 1)
+        {
+            text.color = Color.red;
+        }
     }
 
     string ConvertSpecifiedFormat(float currentTime)

@@ -5,55 +5,61 @@ using UnityEngine;
 
 public class Questioner : MonoBehaviour
 {
-    int currentLevel = 0;
-    int correctAnswerCounter = 0;
-    int questionsNumCounter = 0;
-    int missCounter = 0;
+    QuestionView view = null;
 
-    List<List<Func<eInputType, eTileType, eDirectionType, bool>>> questions = new List<List<Func<eInputType, eTileType, eDirectionType, bool>>>()
+    private void Start()
     {
-        new List<Func<eInputType, eTileType, eDirectionType, bool>>()
-        {// Level1
-            QWhite,
-            QBlack,
-        },
-        new List<Func<eInputType, eTileType, eDirectionType, bool>>()
-        {// Level2
-        },
-        new List<Func<eInputType, eTileType, eDirectionType, bool>>()
-        {// Level3
-        },
-    };
+        view = GetComponent<QuestionView>();
+
+        //var exportData = new QuestionData();
+        //exportData.impl.Add(new QuestionData.ImplQuestionData(eInputType.Any, eTileType.White, eDirectionType.None));
+        //JsonManager.ToJson(Constant.TutorialData, exportData);
+
+        ProgressManager.Instance.Data = JsonManager.FromJson<QuestionData>(Constant.TutorialData);
+    }
 
     void OnEnable()
     {
         EventManager.OnCheckAnswer += OnCheckAnswer;
+        EventManager.OnChangeQuestion += OnChangeQuestion;
     }
 
     void OnDisable()
     {
         EventManager.OnCheckAnswer -= OnCheckAnswer;
+        EventManager.OnChangeQuestion -= OnChangeQuestion;
     }
 
     void OnCheckAnswer(eInputType input, eTileType tile, eDirectionType direction)
     {
-        print(input);
+        print($"Answer is : { input }:{ tile }:{ direction }");
+
+        bool isSame = Answer(input, tile, direction);
+        if(isSame)
+        {
+            EventManager.BroadcastCorrectAnswer();
+        }
+        else
+        {
+            EventManager.BroadcastMissAnswer();
+        }
     }
+
     void OnChangeQuestion()
     {
-
+        var dataImpl = ProgressManager.Instance.Data.impl[ProgressManager.Instance.QuestionIndex];
+        DrawQuest(dataImpl.input, dataImpl.tile, dataImpl.direction);
+        TilesManager.Instance.PlacementTile(dataImpl.placement);
+        print($"Question is : { dataImpl.input }:{ dataImpl.tile }:{ dataImpl.direction }");
     }
-    #region     Questions
 
-    static bool QWhite(eInputType input, eTileType tile, eDirectionType direction)
+    bool Answer(eInputType input, eTileType tile, eDirectionType direction)
     {
-        return true;
+        return ProgressManager.Instance.Data.IsCheckAllSame(new QuestionData.ImplQuestionData(input, tile, direction, ePlacementType.Any), ProgressManager.Instance.QuestionIndex);
     }
 
-    static bool QBlack(eInputType input, eTileType tile, eDirectionType direction)
+    void DrawQuest(eInputType input, eTileType tile, eDirectionType direction)
     {
-        return true;
+        view.DrawQuest(FunctionLibrary.ReverseTile(tile), FunctionLibrary.ReverseInput(input), FunctionLibrary.ReverseDirection(direction));
     }
-
-    #endregion  Questions
 }

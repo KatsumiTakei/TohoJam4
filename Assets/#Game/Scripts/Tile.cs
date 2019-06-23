@@ -1,32 +1,24 @@
-﻿using System;
-using UniRx;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum eTileType
+{
+    None,
+    White,
+    Black,
+}
+
 public class Tile : MonoBehaviour
-    , IPointerEnterHandler
-    , IPointerExitHandler
+    //, IPointerEnterHandler
+    //, IPointerExitHandler
 {
     [SerializeField]
     eTileType tileType = eTileType.White;
 
-
     [SerializeField]
-    eDirectionType direction = eDirectionType.Top;
-
-    void Start()
-    {
-        if (tileType == eTileType.White)
-        {
-            GetComponent<Image>().color = Color.white;
-        }
-        else
-        {
-            GetComponent<Image>().color = Color.black;
-        }
-    }
+    eDirectionType direction = eDirectionType.None;
 
     void OnEnable()
     {
@@ -38,6 +30,7 @@ public class Tile : MonoBehaviour
         EventManager.OnMultipleInput -= OnMultipleInput;
     }
 
+
     void OnMultipleInput(eInputType inputType)
     {
         if (!InputManager.IsClick(inputType))
@@ -46,13 +39,19 @@ public class Tile : MonoBehaviour
         if (!IsClickedSelf())
             return;
 
+        if (ProgressManager.Instance.IsFinished)
+            return;
+
         EventManager.BroadcastCheckAnswer(inputType, tileType, direction);
     }
 
     bool IsClickedSelf()
     {
-        PointerEventData pointer = new PointerEventData(EventSystem.current);
-        pointer.position = Input.mousePosition;
+        PointerEventData pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointer, raycastResults);
         foreach (var hit in raycastResults)
@@ -64,28 +63,13 @@ public class Tile : MonoBehaviour
         return false;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        GetComponent<Image>().color = new Color(1f, 0.4f, 0.4f);
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    GetComponent<Image>().color = new Color(1f, 0.4f, 0.4f);
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (tileType == eTileType.White)
-        {
-            GetComponent<Image>().color = Color.white;
-        }
-        else
-        {
-            GetComponent<Image>().color = Color.black;
-        }
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    GetComponent<Image>().color = Color.white;
+    //}
 }
-
-public enum eTileType
-{
-    White,
-    Black,
-}
-
-

@@ -1,7 +1,6 @@
-﻿using TMPro;
-using System.Collections.Generic;
+﻿using System;
+using UniRx;
 using UnityEngine;
-using System;
 
 public class ShortTimer : MonoBehaviour
 {
@@ -9,22 +8,30 @@ public class ShortTimer : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.OnStartQuestion += OnStartQuestion;
-    }
-    void OnDisable()
-    {
-        EventManager.OnStartQuestion -= OnStartQuestion;
-        timeKeeper.Dispose();
+        EventManager.OnChangeQuestion += OnChangeQuestion;
+        EventManager.OnGameResult += OnGameResult;
     }
 
-    void OnStartQuestion()
+    void OnDisable()
     {
-        timeKeeper.RestartTimer();
+        EventManager.OnChangeQuestion -= OnChangeQuestion;
+        EventManager.OnGameResult -= OnGameResult;
+        timeKeeper.Dispose();
     }
 
     void Update()
     {
         timeKeeper.ManualUpdate();
+    }
+
+    void OnGameResult(bool result)
+    {
+        timeKeeper.StopTimer();
+    }
+
+    void OnChangeQuestion()
+    {
+        timeKeeper.RestartTimer();
     }
 
 }
@@ -36,10 +43,18 @@ public class TimeKeeper : IDisposable
 
     public TimeKeeper()
     {
+        IsRunning = false;
+        timeLimit = 5f;
     }
 
     public void Dispose()
     {
+    }
+
+    public void StopTimer()
+    {
+        ProcessTimer.Stop();
+        IsRunning = false;
     }
 
     public void RestartTimer()
@@ -54,11 +69,12 @@ public class TimeKeeper : IDisposable
             return;
 
         float currentTime = timeLimit - ProcessTimer.TotalSeconds;
-        EventManager.BroadcastProgressTime(currentTime);
+        EventManager.BroadcastChangeTime(currentTime);
 
         if (currentTime <= 0f)
         {
-            EventManager.BroadcastTiemup();
+            EventManager.BroadcastCheckAnswer(eInputType.Any, eTileType.None, eDirectionType.None);
+            EventManager.BroadcastTimeup();
         }
     }
 

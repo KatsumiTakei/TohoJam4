@@ -31,6 +31,7 @@ public static class InputManager
 
 public enum eInputType
 {
+    Any,
     ClickRight,
     ClickLeft,
     

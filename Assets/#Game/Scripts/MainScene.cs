@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class MainScene : MonoBehaviour
 {
-
     void Update()
     {
         InputManager.ManualUpdate();
@@ -17,8 +16,8 @@ public enum eDirectionType
 {
     None,
     Top,
+    Under,
     Right,
     Left,
-    Under,
 
 }
