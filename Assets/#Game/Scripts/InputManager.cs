@@ -34,6 +34,8 @@ public enum eInputType
     Any,
     ClickRight,
     ClickLeft,
-    
+
+    Random = 99,
+
 }
 

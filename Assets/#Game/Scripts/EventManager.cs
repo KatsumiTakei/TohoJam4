@@ -20,9 +20,6 @@ public static class EventManager
     public static Action OnTimeup = null;
     public static void BroadcastTimeup() => OnTimeup?.Invoke();
 
-    //public static Action OnStartWave = null;
-    //public static void BroadcastStartWave() => OnStartWave?.Invoke();
-
 
     public static Action OnCorrectAnswer = null;
     public static void BroadcastCorrectAnswer() => OnCorrectAnswer?.Invoke();

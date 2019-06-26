@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// リソースのパスを定数で管理するクラス
 /// エディタ拡張によって作成されました
-/// 日時 : 2019/06/23 23:39:42
+/// 日時 : 2019/06/24 3:17:19
 /// </summary>
 public static class ResourcesPath
 {
@@ -11,6 +11,8 @@ public static class ResourcesPath
         public static class BGM
         {
             public const string Path = "Audio/BGM/";
+            public const string _Reverseideology = "Reverseideology";
+            public const string _Path_Reverseideology = "Audio/BGM/Reverseideology";
         }
         public static class SE
         {

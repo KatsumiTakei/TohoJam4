@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class TilesManager : UnityDLL.SingletonMonoBehaviour<TilesManager>
                 Debug.LogWarning("fall throw ePlacementType Any");
                 break;
             case ePlacementType.Random:
-                PlacementTile((ePlacementType)Random.Range(1, 7));
+                PlacementTile((ePlacementType)Random.Range(1, 7 + 1));
                 break;
             case ePlacementType.Top:
                 Active(new bool[] { true, false, false, false });
@@ -48,6 +48,11 @@ public class TilesManager : UnityDLL.SingletonMonoBehaviour<TilesManager>
         for (int i = 0; i < Tiles.Length; i++)
         {
             Tiles[i].SetActive(actives[i]);
+
+            if(Tiles[i].activeInHierarchy)
+            {
+                Tiles[i].transform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2).OnComplete(() => Tiles[i].transform.localScale = Vector3.one);
+            }
         }
     }
 

@@ -8,6 +8,7 @@ public enum eTileType
     None,
     White,
     Black,
+    Random = 99,
 }
 
 public class Tile : MonoBehaviour

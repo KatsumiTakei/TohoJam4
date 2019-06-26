@@ -13,6 +13,7 @@ public class MainScene : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.PlayBGM(ResourcesPath.Audio.BGM._Reverseideology);
         ToggleAll(backHome);
     }
 
@@ -61,4 +62,5 @@ public enum eDirectionType
     Right,
     Left,
 
+    Random = 99,
 }

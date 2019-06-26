@@ -1,20 +1,20 @@
-﻿public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
+﻿
+/// <summary>
+/// ProgressManager
+/// </summary>
+public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
 {
 
     int missCounter = 0;
-
-    int currentLevel = 0;
 
     public QuestionData Data { get; set; } = new QuestionData();
     public int QuestionIndex { get; set; } = 0;
     public bool IsFinished { get; set; } = false;
 
-
     public void Reset()
     {
         missCounter = 0;
         QuestionIndex = 0;
-        currentLevel = 0;
     }
 
     private void OnEnable()
@@ -38,24 +38,25 @@
 
     void OnCorrectAnswer()
     {
-        AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._right);
         QuestionIndex++;
+        if (QuestionIndex < Data.GetQuestMax())
+            AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._right);
         NextQuest();
     }
 
     void OnMissAnswer()
     {
         missCounter++;
-        QuestionIndex++;
-        NextQuest();
 
         switch (missCounter)
         {
             case 1:
                 AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._miss);
+                NextQuest();
                 break;
             case 2:
                 AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._Pinch);
+                NextQuest();
                 break;
             case 3:
                 EventManager.BroadcastGameResult(false);
@@ -71,6 +72,7 @@
         if (QuestionIndex >= Data.GetQuestMax())
         {
             EventManager.BroadcastGameResult(true);
+            AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._Result);
             IsFinished = true;
         }
         else
