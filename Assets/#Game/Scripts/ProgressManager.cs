@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 /// <summary>
 /// ProgressManager
 /// </summary>
@@ -8,8 +9,8 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
     int missCounter = 0;
 
     public QuestionData Data { get; set; } = new QuestionData();
-    public int QuestionIndex { get; set; } = 0;
-    public bool IsFinished { get; set; } = false;
+    public int QuestionIndex { get; private set; } = 0;
+    public bool IsFinished { get; private set; } = false;
 
     public void Reset()
     {
@@ -59,7 +60,7 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
                 NextQuest();
                 break;
             case 3:
-                EventManager.BroadcastGameResult(false);
+                StartCoroutine(CoGameResult(false));
                 AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._gameover);
                 IsFinished = true;
                 break;
@@ -71,7 +72,7 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
     {
         if (QuestionIndex >= Data.GetQuestMax())
         {
-            EventManager.BroadcastGameResult(true);
+            StartCoroutine(CoGameResult(true));
             AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._Result);
             IsFinished = true;
         }
@@ -80,4 +81,13 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
             EventManager.BroadcastChangeQuestion();
         }
     }
+
+    IEnumerator CoGameResult(bool isResult)
+    {
+        yield return new UnityEngine.WaitForSeconds(0.1f);
+
+        EventManager.BroadcastGameResult(isResult);
+
+    }
+
 }

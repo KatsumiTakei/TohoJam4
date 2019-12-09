@@ -7,6 +7,8 @@ public class MainScene : MonoBehaviour
     [SerializeField]
     GameObject[] ui = null;
 
+    [SerializeField]
+    ScoreManager scoreManager = null;
 
     bool[] startQuest = new bool[] { false, true };
     bool[] backHome = new bool[] { true, false };
@@ -37,11 +39,13 @@ public class MainScene : MonoBehaviour
     public void OnClickRetry()
     {
         ProgressManager.Instance.Reset();
+        scoreManager.Reset();
     }
 
     public void OnClickBackHome()
     {
         ProgressManager.Instance.Reset();
+        scoreManager.Reset();
         ToggleAll(backHome);
     }
 

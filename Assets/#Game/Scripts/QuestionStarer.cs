@@ -92,6 +92,7 @@ public class QuestionStarer : MonoBehaviour
             text.text = "Game over...";
             text.fontSize = 48;
         }
+
     }
 
     public void OnClickResultButton(bool active)

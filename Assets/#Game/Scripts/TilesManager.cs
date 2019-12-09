@@ -49,9 +49,17 @@ public class TilesManager : UnityDLL.SingletonMonoBehaviour<TilesManager>
         {
             Tiles[i].SetActive(actives[i]);
 
-            if(Tiles[i].activeInHierarchy)
+            if (Tiles[i].activeInHierarchy)
             {
-                Tiles[i].transform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2).OnComplete(() => Tiles[i].transform.localScale = Vector3.one);
+                int index = i;//    C# 5.0 less
+                Tiles[i].transform
+                    .DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2)
+                    .OnComplete(() => {
+
+                        Tiles[index].transform.DOKill();
+                        Tiles[index].transform.DOScale(Vector3.one, 0.1f);
+
+                    });
             }
         }
     }
