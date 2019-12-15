@@ -9,7 +9,7 @@ public class MainScene : MonoBehaviour
 
     [SerializeField]
     ScoreManager scoreManager = null;
-
+    
     bool[] startQuest = new bool[] { false, true };
     bool[] backHome = new bool[] { true, false };
 
@@ -26,13 +26,15 @@ public class MainScene : MonoBehaviour
 
     public void OnClickTutorial()
     {
-        ProgressManager.Instance.Data = JsonManager.FromJson<QuestionData>(Constant.TutorialData);
+        ProgressManager.Instance.SetQuestData(Constant.TutorialData);
+        ProgressManager.Instance.SetMissTextureAlpha(0f);
         ToggleAll(startQuest);
     }
 
     public void OnClickArcade()
     {
-        ProgressManager.Instance.Data = JsonManager.FromJson<QuestionData>(Constant.MainData);
+        ProgressManager.Instance.SetQuestData(Constant.MainData);
+        ProgressManager.Instance.SetMissTextureAlpha(0f);
         ToggleAll(startQuest);
     }
 

@@ -1,30 +1,49 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestionView : MonoBehaviour
 {
-    [field: RenameField(nameof(Imgs))]
-    public List<Image> Imgs = null;
+    [SerializeField]
+    [field: RenameField(nameof(imgs))]
+    Image[] imgs = null;
+
+    [SerializeField]
+    [field: RenameField(nameof(gyroImgs))]
+    Image[] gyroImgs = null;
+
+    enum eImgType
+    {
+        White,
+        Black,
+
+        RChar,
+        LChar,
+
+        RArraw,
+        LArraw,
+        TArraw,
+        BArraw,
+
+    }
+
 
     private void Awake()
     {
         HideAll();
-    }
 
-    private void OnEnable()
-    {
-        EventManager.OnChangeQuestion += OnChangeQuestion;
-    }
 
-    private void OnDisable()
-    {
-        EventManager.OnChangeQuestion -= OnChangeQuestion;
-    }
+#if     UNITY_ANDROID && !UNITY_EDITOR
 
-    void OnChangeQuestion()
-    {
+        for (int i = 0; i < gyroImgs.Length; i++)
+        {
+            gyroImgs[i].gameObject.SetActive(false);
+            imgs[(int)(eImgType.RChar) + i] = gyroImgs[i];
+        }
+#endif  //  UNITY_ANDROID && !UNITY_EDITOR
+
 
     }
 
@@ -33,16 +52,16 @@ public class QuestionView : MonoBehaviour
         switch (tileType)
         {
             case eTileType.None:
-                Imgs[ConvType(eImgType.White)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.Black)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.White)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.Black)].gameObject.SetActive(false);
                 break;
             case eTileType.White:
-                Imgs[ConvType(eImgType.White)].gameObject.SetActive(true);
-                Imgs[ConvType(eImgType.Black)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.White)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.Black)].gameObject.SetActive(false);
                 break;
             case eTileType.Black:
-                Imgs[ConvType(eImgType.White)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.Black)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.White)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.Black)].gameObject.SetActive(true);
                 break;
         }
     }
@@ -53,16 +72,16 @@ public class QuestionView : MonoBehaviour
         switch (inputType)
         {
             case eInputType.Any:
-                Imgs[ConvType(eImgType.LChar)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RChar)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LChar)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RChar)].gameObject.SetActive(false);
                 break;
             case eInputType.ClickLeft:
-                Imgs[ConvType(eImgType.LChar)].gameObject.SetActive(true);
-                Imgs[ConvType(eImgType.RChar)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LChar)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.RChar)].gameObject.SetActive(false);
                 break;
             case eInputType.ClickRight:
-                Imgs[ConvType(eImgType.LChar)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RChar)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.LChar)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RChar)].gameObject.SetActive(true);
                 break;
         }
 
@@ -74,34 +93,34 @@ public class QuestionView : MonoBehaviour
         switch (directionType)
         {
             case eDirectionType.None:
-                Imgs[ConvType(eImgType.TArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.BArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.LArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.TArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.BArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RArraw)].gameObject.SetActive(false);
                 break;
             case eDirectionType.Top:
-                Imgs[ConvType(eImgType.TArraw)].gameObject.SetActive(true);
-                Imgs[ConvType(eImgType.BArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.LArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.TArraw)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.BArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RArraw)].gameObject.SetActive(false);
                 break;
             case eDirectionType.Left:
-                Imgs[ConvType(eImgType.TArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.BArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.LArraw)].gameObject.SetActive(true);
-                Imgs[ConvType(eImgType.RArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.TArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.BArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LArraw)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.RArraw)].gameObject.SetActive(false);
                 break;
             case eDirectionType.Right:
-                Imgs[ConvType(eImgType.TArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.BArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.LArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RArraw)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.TArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.BArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.LArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RArraw)].gameObject.SetActive(true);
                 break;
             case eDirectionType.Under:
-                Imgs[ConvType(eImgType.TArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.BArraw)].gameObject.SetActive(true);
-                Imgs[ConvType(eImgType.LArraw)].gameObject.SetActive(false);
-                Imgs[ConvType(eImgType.RArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.TArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.BArraw)].gameObject.SetActive(true);
+                imgs[(int)(eImgType.LArraw)].gameObject.SetActive(false);
+                imgs[(int)(eImgType.RArraw)].gameObject.SetActive(false);
                 break;
         }
 
@@ -113,7 +132,7 @@ public class QuestionView : MonoBehaviour
         DrawChar(inputType);
         DrawDir(directionType);
 
-        var actives = Imgs.FindAll(img => img.isActiveAndEnabled);
+        var actives = Array.FindAll(imgs, (img => img.isActiveAndEnabled));
         foreach (var img in actives)
         {
             img.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f, 2).OnComplete(() => img.rectTransform.localScale = Vector3.one);
@@ -125,26 +144,5 @@ public class QuestionView : MonoBehaviour
     {
         DrawQuest(eTileType.None, eInputType.Any, eDirectionType.None);
     }
-
-    public int ConvType(eImgType imgType)
-    {
-        return (int)imgType;
-    }
-
-}
-
-public enum eImgType
-{
-    White,
-    Black,
-
-    RChar,
-    LChar,
-
-    RArraw,
-    LArraw,
-    TArraw,
-    BArraw,
-
 
 }

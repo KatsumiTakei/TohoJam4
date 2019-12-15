@@ -27,7 +27,7 @@ public class QuestionStarer : MonoBehaviour
     public void Reset()
     {
         text.color = new Color(0.75f, 0.75f, 0.75f);
-        text.rectTransform.localScale = new Vector3(1, 1, 1);
+        text.rectTransform.localScale = Vector3.one;
         text.rectTransform.anchoredPosition = new Vector2(25, 25);
         text.fontSize = 76;
         text.text = "Ready";
@@ -67,7 +67,7 @@ public class QuestionStarer : MonoBehaviour
 
         yield return wait02;
 
-        text.DOFade(0, 0.5f);
+        text.DOColor(Color.clear, 0.5f);
         text.rectTransform.DOScale(1.5f, 0.5f);
         text.rectTransform.anchoredPosition = new Vector2(125, 25);
         text.text = "Go!";

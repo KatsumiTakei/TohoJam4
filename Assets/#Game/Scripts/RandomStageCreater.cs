@@ -7,9 +7,9 @@ public class RandomStageCreater : MonoBehaviour
     {
         QuestionData data = new QuestionData();
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < Constant.QuestMax; i++)
         {
-            data.impl.Add(CreateQuestData());
+            data.AddQuestionData(CreateQuestData());
 
         }
         JsonManager.ToJson(Constant.MainData, data);

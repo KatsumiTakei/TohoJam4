@@ -10,7 +10,6 @@ public class Questioner : MonoBehaviour
     private void Start()
     {
         view = GetComponent<QuestionView>();
-        ProgressManager.Instance.Data = JsonManager.FromJson<QuestionData>(Constant.TutorialData);
     }
 
     void OnEnable()
@@ -27,7 +26,7 @@ public class Questioner : MonoBehaviour
 
     void OnCheckAnswer(eInputType input, eTileType tile, eDirectionType direction)
     {
-        print($"Answer is : { input }:{ tile }:{ direction }");
+        Debug.Log($"Answer is : { input }:{ tile }:{ direction }");
 
         bool isSame = Answer(input, tile, direction);
         if(isSame)
@@ -42,15 +41,15 @@ public class Questioner : MonoBehaviour
 
     void OnChangeQuestion()
     {
-        var dataImpl = ProgressManager.Instance.Data.impl[ProgressManager.Instance.QuestionIndex];
+        var dataImpl = ProgressManager.Instance.GetQuestionData();
         DrawQuest(dataImpl.input, dataImpl.tile, dataImpl.direction);
         TilesManager.Instance.PlacementTile(dataImpl.placement);
-        print($"Question is : { dataImpl.input }:{ dataImpl.tile }:{ dataImpl.direction }");
+        Debug.Log($"Question is : { dataImpl.input }:{ dataImpl.tile }:{ dataImpl.direction }");
     }
 
     bool Answer(eInputType input, eTileType tile, eDirectionType direction)
     {
-        return ProgressManager.Instance.Data.IsCheckAllSame(new QuestionData.ImplQuestionData(input, tile, direction, ePlacementType.Any), ProgressManager.Instance.QuestionIndex);
+        return ProgressManager.Instance.IsCheckAllSame(input, tile, direction);
     }
 
     void DrawQuest(eInputType input, eTileType tile, eDirectionType direction)

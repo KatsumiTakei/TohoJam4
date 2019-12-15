@@ -5,18 +5,26 @@ using System.Collections;
 /// </summary>
 public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
 {
+    [UnityEngine.SerializeField]
+    TMPro.TextMeshProUGUI text = null;
 
     int missCounter = 0;
+    int questionIndex = 0;
+    QuestionData implData = new QuestionData();
 
-    public QuestionData Data { get; set; } = new QuestionData();
-    public int QuestionIndex { get; private set; } = 0;
     public bool IsFinished { get; private set; } = false;
 
     public void Reset()
     {
         missCounter = 0;
-        QuestionIndex = 0;
+        questionIndex = 0;
     }
+
+    private void Start()
+    {
+        text.canvasRenderer.SetAlpha(0f);
+    }
+
 
     private void OnEnable()
     {
@@ -39,14 +47,17 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
 
     void OnCorrectAnswer()
     {
-        QuestionIndex++;
-        if (QuestionIndex < Data.GetQuestMax())
+        questionIndex++;
+        if (questionIndex < implData.GetQuestMax())
             AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._right);
         NextQuest();
     }
 
     void OnMissAnswer()
     {
+        text.canvasRenderer.SetAlpha(1f);
+        text.CrossFadeAlpha(0f, 0.5f, false);
+
         missCounter++;
 
         switch (missCounter)
@@ -70,7 +81,7 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
 
     void NextQuest()
     {
-        if (QuestionIndex >= Data.GetQuestMax())
+        if (questionIndex >= implData.GetQuestMax())
         {
             StartCoroutine(CoGameResult(true));
             AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._Result);
@@ -90,4 +101,28 @@ public class ProgressManager : UnityDLL.SingletonMonoBehaviour<ProgressManager>
 
     }
 
+    public void SetMissTextureAlpha(float alpha)
+    {
+        text.canvasRenderer.SetAlpha(alpha);
+    }
+
+    public string GetTotalQusetText()
+    {
+        return $"Quest\n{ questionIndex } / { implData.GetQuestMax()}";
+    }
+
+    public void SetQuestData(string setDataName)
+    {
+        implData = JsonManager.FromJson<QuestionData>(setDataName);
+    }
+
+    public bool IsCheckAllSame(eInputType input, eTileType tile, eDirectionType direction)
+    {
+        return implData.IsCheckAllSame(new QuestionData.ImplQuestionData(input, tile, direction, ePlacementType.Any), questionIndex);
+    }
+
+    public QuestionData.ImplQuestionData GetQuestionData()
+    {
+        return implData.GetQuestionData(questionIndex);
+    }
 }

@@ -37,6 +37,12 @@ public class Tile : MonoBehaviour
         if (!InputManager.IsClick(inputType))
             return;
 
+#if UNITY_ANDROID && !UNITY_EDITOR
+
+        inputType = (AccelerationVallue.AccelerationX < 0) ? eInputType.ClickLeft : eInputType.ClickRight;
+
+#endif  //  UNITY_ANDROID && !UNITY_EDITOR
+
         if (!IsClickedSelf())
             return;
 

@@ -1,11 +1,21 @@
 fileFormatVersion: 2
 guid: 9736d18af8f8e3145b7b82e3b53a93f3
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Mosue_0
-    21300002: Mosue_1
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Mosue_0
+  - first:
+      213: 21300002
+    second: Mosue_1
+  - first:
+      213: -2587672265586669977
+    second: Mosue_2
+  - first:
+      213: 4127146467721808743
+    second: Mosue_3
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -60,7 +70,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -71,7 +81,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -82,7 +93,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -93,7 +105,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -104,11 +117,54 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
       name: Mosue_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a90631142cac9ce4baadff4d77eeacae
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mosue_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c78f6f98bbfaa47ac61f40ee2d398e
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mosue_2
       rect:
         serializedVersion: 2
         x: 0
@@ -122,13 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c95d6ac0d9bffc04294eb4360436d3a3
+      spriteID: a1d70bebd85d53e4eacaa8c0dbafd520
+      internalID: -2587672265586669977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mosue_1
+      name: Mosue_3
       rect:
         serializedVersion: 2
         x: 32
@@ -142,7 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de340c49e5220af49bf81f7f11295408
+      spriteID: 006182a543a480644a4b23a86d53c8cf
+      internalID: 4127146467721808743
       vertices: []
       indices: 
       edges: []
@@ -151,10 +209,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: a38eb509be4dab84db3fd01f55b956e1
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

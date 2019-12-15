@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/naichilab/unity-simple-ranking/Sample/Sample.unity
     guid: 1e5be826ad14f4d6ea5a02e1321ad917
+  - enabled: 0
+    path: Assets/#Game/Scenes/Test.unity
+    guid: cd033dd8fe56f09478a7ec2e37798bc5
+  - enabled: 0
+    path: Assets/DebugConsole/DebugConsoleScene.unity
+    guid: 22662405eaad87743974a05651fe8745
+  - enabled: 0
+    path: Assets/Modal/Main.unity
+    guid: f9509299ba83eda4bbd200d59a4a1edb
+  - enabled: 0
+    path: Assets/SU3DJPFont/Demo/SampleScene.unity
+    guid: 0a5fa104f59ab7e45b44b0964854fcc6
   m_configObjects: {}

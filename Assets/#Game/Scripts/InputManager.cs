@@ -4,12 +4,16 @@ using UnityEngine;
 
 public static class InputManager
 {
-    static Mouse mouse = new Mouse();
-
 
     public static void ManualUpdate()
     {
-        mouse.ManualUpdate();
+        Mouse.ManualUpdate();
+
+#if  UNITY_ANDROID && !UNITY_EDITOR
+        
+        AccelerationVallue.ManualUpdate();
+
+#endif  //  UNITY_ANDROID && !UNITY_EDITOR
     }
 
     public static bool IsClick(eInputType inputType)

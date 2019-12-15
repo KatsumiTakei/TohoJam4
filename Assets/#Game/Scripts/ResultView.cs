@@ -14,7 +14,7 @@ public class ResultView : MonoBehaviour
 
     public void Reset()
     {
-        totalQuset.text = $"Quest\n{ProgressManager.Instance.QuestionIndex} / {ProgressManager.Instance.Data.GetQuestMax()}";
+        totalQuset.text = ProgressManager.Instance.GetTotalQusetText();
         heart.rectTransform.DOSizeDelta(new Vector2(48, 16), 0.5f);
     }
 
@@ -34,12 +34,12 @@ public class ResultView : MonoBehaviour
 
     void OnGameResult(bool res)
     {
-        totalQuset.text = $"Quest\n{ProgressManager.Instance.QuestionIndex} / {ProgressManager.Instance.Data.GetQuestMax()}";
+        totalQuset.text = ProgressManager.Instance.GetTotalQusetText();
     }
 
     void OnChangeQuestion()
     {
-        totalQuset.text = $"Quest\n{ProgressManager.Instance.QuestionIndex} / {ProgressManager.Instance.Data.GetQuestMax()}";
+        totalQuset.text = ProgressManager.Instance.GetTotalQusetText();
         totalQuset.rectTransform.DOPunchScale(new Vector3(0.5f, 0.5f), 0.5f).OnComplete(() => totalQuset.rectTransform.localScale = Vector3.one);
     }
 

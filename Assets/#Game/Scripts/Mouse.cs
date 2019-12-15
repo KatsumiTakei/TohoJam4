@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
-public class Mouse
+public static class Mouse
 {
 
-    public void ManualUpdate()
+    public static void ManualUpdate()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             EventManager.BroadcastMultipleInput(eInputType.ClickLeft);
         }

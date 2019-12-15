@@ -6,5 +6,5 @@ using UnityEngine;
 {
     public static string MainData = "MainData";
     public static string TutorialData = "TutorialData";
-
+    public static int QuestMax = 50;
 }

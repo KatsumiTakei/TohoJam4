@@ -6,14 +6,14 @@ using UnityEngine;
 [System.Serializable]
 public class QuestionData
 {
-
-    public List<ImplQuestionData> impl = new List<ImplQuestionData>();
-
+    //  Jsonのシリアライズのため[SerializeField]
+    [SerializeField]
+    List<ImplQuestionData> impl = new List<ImplQuestionData>();
 
     [System.Serializable]
     public class ImplQuestionData
     {
-        public eInputType input =  eInputType.Any;
+        public eInputType input = eInputType.Any;
         public eTileType tile = eTileType.None;
         public eDirectionType direction = eDirectionType.None;
         public ePlacementType placement = ePlacementType.Top;
@@ -27,9 +27,18 @@ public class QuestionData
         }
     }
 
-    public void ToJson(string filename)
+    public int GetQuestMax()
     {
-        JsonManager.ToJson(filename, this);
+        return impl.Count;
+    }
+    public ImplQuestionData GetQuestionData(int index)
+    {
+        return impl[index];
+    }
+
+    public void AddQuestionData(ImplQuestionData questionData)
+    {
+        impl.Add(questionData);
     }
 
     public bool IsCheckAllSame(ImplQuestionData data, int index)
@@ -39,10 +48,5 @@ public class QuestionData
             && (data.tile == impl[index].tile || impl[index].tile == eTileType.None);
 
         return res;
-    }
-
-    public int GetQuestMax()
-    {
-        return impl.Count;
     }
 }
