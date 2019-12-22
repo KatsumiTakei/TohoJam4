@@ -40,7 +40,7 @@
     		android:noHistory="true"
     		android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
 		</activity>
-               
+		
         <service android:name="com.nifcloud.mbaas.ncmbfcmplugin.NCMBFirebaseMessagingService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -19,6 +19,7 @@ public class MainScene : MonoBehaviour
         ToggleAll(backHome);
     }
 
+
     void Update()
     {
         InputManager.ManualUpdate();

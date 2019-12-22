@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/#Game/Scenes/Main.unity
     guid: d13bd808ddd860346837b28ed2bbb34f
   - enabled: 1
+    path: Assets/SocialWorker/Demo/Scenes/SceneDemo.unity
+    guid: 9dc71e76679cb4120b1bdaa0345beaf7
+  - enabled: 1
     path: Assets/naichilab/unity-simple-ranking/Scenes/Ranking.unity
     guid: 152244f5855414ac4a3874f14efa583c
   - enabled: 0
@@ -26,4 +29,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SU3DJPFont/Demo/SampleScene.unity
     guid: 0a5fa104f59ab7e45b44b0964854fcc6
+  - enabled: 0
+    path: Assets/TapRippleShader/Scenes/TapRippleShader.unity
+    guid: d1eeff40ee906f841820747ed2b307aa
+  - enabled: 0
+    path: Assets/GodTouch/Demo/Scenes/Demo.unity
+    guid: 8c84f928f8d26439a90ef3a107a608f8
+  - enabled: 0
+    path: Assets/SocialConnector/Sample/Sample.unity
+    guid: d9b5913d08a1a480e9a4c7bbbcf6ec6a
   m_configObjects: {}

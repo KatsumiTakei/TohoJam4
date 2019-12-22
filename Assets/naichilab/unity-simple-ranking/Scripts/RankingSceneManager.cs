@@ -33,16 +33,12 @@ namespace naichilab
             get { return _objectid ?? (_objectid = PlayerPrefs.GetString(BoardIdPlayerPrefsKey, null)); }
             set
             {
-                if (_objectid == value)
-                    return;
-                PlayerPrefs.SetString(BoardIdPlayerPrefsKey, _objectid = value);
+                if (_objectid != value)
+                    PlayerPrefs.SetString(BoardIdPlayerPrefsKey, _objectid = value);
             }
         }
 
-        private string BoardIdPlayerPrefsKey
-        {
-            get { return string.Format("{0}_{1}_{2}", "board", _board.ClassName, OBJECT_ID); }
-        }
+        private string BoardIdPlayerPrefsKey { get { return $"{"board"}_{_board.ClassName}_{OBJECT_ID}"; } }
 
         private RankingInfo _board;
         private IScore _lastScore;
@@ -53,18 +49,7 @@ namespace naichilab
         /// 入力した名前
         /// </summary>
         /// <value>The name of the inputted.</value>
-        private string InputtedNameForSave
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(nameInputField.text))
-                {
-                    return "名無し";
-                }
-
-                return nameInputField.text;
-            }
-        }
+        private string InputtedNameForSave { get { return string.IsNullOrEmpty(nameInputField.text) ? "noname" : nameInputField.text; } }
 
         void Start()
         {
@@ -80,7 +65,7 @@ namespace naichilab
         IEnumerator GetHighScoreAndRankingBoard()
         {
             scoreLabel.text = _lastScore.TextForDisplay;
-            captionLabel.text = string.Format("{0}ランキング", _board.BoardName);
+            captionLabel.text = $"{_board.BoardName}ランキング";
 
             //ハイスコア取得
             {
@@ -101,8 +86,7 @@ namespace naichilab
                     nameInputField.text = _ncmbRecord[COLUMN_NAME].ToString();
                 }
                 else
-                {
-                    //登録されていない
+                {//登録されていない
                     highScoreLabel.text = "-----";
                 }
             }
@@ -120,18 +104,15 @@ namespace naichilab
                 var highScore = _board.BuildScore(_ncmbRecord[COLUMN_SCORE].ToString());
 
                 if (_board.Order == ScoreOrder.OrderByAscending)
-                {
-                    //数値が低い方が高スコア
+                {//数値が低い方が高スコア
                     sendScoreButton.interactable = _lastScore.Value < highScore.Value;
                 }
                 else
-                {
-                    //数値が高い方が高スコア
+                {//数値が高い方が高スコア
                     sendScoreButton.interactable = highScore.Value < _lastScore.Value;
                 }
 
-                Debug.Log(string.Format("登録済みスコア:{0} 今回スコア:{1} ハイスコア更新:{2}", highScore.Value, _lastScore.Value,
-                    sendScoreButton.interactable));
+                Debug.Log($"登録済みスコア:{highScore.Value} 今回スコア:{_lastScore.Value} ハイスコア更新:{sendScoreButton.interactable}");
             }
         }
 
