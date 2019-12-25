@@ -1,55 +1,50 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="YOUR_PACKAGE_NAME" >
-	<!-- Put your package name here. -->
-
-	 <uses-sdk android:minSdkVersion="14"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-
-    <application
-        android:icon="@drawable/app_icon"
-        android:label="@string/app_name"
-        android:debuggable="true">
-        <!-- <meta-data android:name="smallIcon" android:resource="@drawable/comment_icon"/> -->
-        <!-- UNITY PLAYER ACTIVITIES ( [WARNING] if use Prime31, edit 'com.nifcloud.mbaas.ncmbfcmplugin' to 'com.prime31' at android:name of 3 these activities) -->
-        <activity android:name="com.unity3d.player.UnityPlayerActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="sensorLandscape"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="com.nifcloud.mbaas.ncmbfcmplugin.UnityPlayerActivity"
-            android:launchMode="singleTop"
-            android:label="@string/app_name"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
-            <meta-data android:name="android.app.lib_name" android:value="unity" />
-            <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
-        </activity>
-            
-		<!---ダイアログ -->
-		<activity
-  			android:name="com.nifcloud.mbaas.ncmbfcmplugin.NCMBDialogActivity"
-    		android:excludeFromRecents="true"
-    		android:launchMode="singleInstance"
-    		android:noHistory="true"
-    		android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
-		</activity>
-		
-        <service android:name="com.nifcloud.mbaas.ncmbfcmplugin.NCMBFirebaseMessagingService" android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-    </application>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.RomanesqueFeraks.rotarepOesreveR" android:installLocation="preferExternal">
+  <!-- Put your package name here. -->
+  <uses-sdk android:minSdkVersion="14" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <application android:label="@string/app_name" android:debuggable="true" android:isGame="true" android:banner="@drawable/app_banner" android:roundIcon="@mipmap/app_icon_round" android:icon="@mipmap/app_icon">
+    <!-- <meta-data android:name="smallIcon" android:resource="@drawable/comment_icon"/> -->
+    <!-- UNITY PLAYER ACTIVITIES ( [WARNING] if use Prime31, edit 'com.nifcloud.mbaas.ncmbfcmplugin' to 'com.prime31' at android:name of 3 these activities) -->
+    <activity android:name="com.unity3d.player.UnityPlayerActivity" android:label="@string/app_name" android:screenOrientation="sensorLandscape" android:launchMode="singleTask" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density" android:hardwareAccelerated="false">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+      </intent-filter>
+      <meta-data android:name="android.notch_support" android:value="true" />
+    </activity>
+    <activity android:name="com.nifcloud.mbaas.ncmbfcmplugin.UnityPlayerActivity" android:launchMode="singleTop" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
+      <meta-data android:name="android.app.lib_name" android:value="unity" />
+      <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
+    </activity>
+    <!---ダイアログ -->
+    <activity android:name="com.nifcloud.mbaas.ncmbfcmplugin.NCMBDialogActivity" android:excludeFromRecents="true" android:launchMode="singleInstance" android:noHistory="true" android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
+    </activity>
+    <service android:name="com.nifcloud.mbaas.ncmbfcmplugin.NCMBFirebaseMessagingService" android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data android:name="unity.build-id" android:value="d62a05d3-53ef-4f31-82ef-e6b9fb0b005f" />
+    <meta-data android:name="unity.splash-mode" android:value="0" />
+    <meta-data android:name="unity.splash-enable" android:value="True" />
+    <meta-data android:name="notch.config" android:value="portrait|landscape" />
+    <provider 
+        android:name="android.support.v4.content.FileProvider" 
+        android:authorities="com.RomanesqueFeraks.rotarepOesreveR" 
+        android:exported="false" 
+        android:grantUriPermissions="true">
+    <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+    </provider>
+  </application>
+  <uses-feature android:glEsVersion="0x00020000" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+  <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+  <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false" />
+  <uses-feature android:name="android.hardware.touchscreen.multitouch.distinct" android:required="false" />
 </manifest>

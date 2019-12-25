@@ -27,7 +27,6 @@ namespace GoogleMobileAds.Api
         {
             this.client = GoogleMobileAdsClientFactory.BuildBannerClient();
             client.CreateBannerView(adUnitId, adSize, position);
-
             ConfigureBannerEvents();
         }
 
