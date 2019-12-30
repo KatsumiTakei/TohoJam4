@@ -17,6 +17,8 @@ public class MainScene : MonoBehaviour
     {
         AudioManager.PlayBGM(ResourcesPath.Audio.BGM._Reverseideology);
         ToggleAll(backHome);
+
+
     }
 
 

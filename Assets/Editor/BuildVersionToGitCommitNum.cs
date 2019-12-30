@@ -38,10 +38,12 @@ public class BuildVersionToGitCommitNum : IPreprocessBuildWithReport
         PlayerSettings.Android.bundleVersionCode += 1;
 
         GameObject target = GameObject.Find("CommitVersion");
-        if(target)
-            target.GetComponent<TMPro.TextMeshProUGUI>().text = 
-                "CommitHash : " + PlayerSettings.bundleVersion + "\n" + 
-                "BuildVersion  : " + PlayerSettings.Android.bundleVersionCode;
+        if (target)
+        {
+            target.GetComponent<TMPro.TextMeshProUGUI>().text = (EditorUserBuildSettings.development) ?
+              "CommitHash : " + PlayerSettings.bundleVersion + "\n" + "BuildVersion  : " + PlayerSettings.Android.bundleVersionCode :
+              string.Empty;
+        }
 
         GameObject debugCanvas = GameObject.Find("DebugCanvas");
         if (debugCanvas)

@@ -101,5 +101,7 @@ public class QuestionStarer : MonoBehaviour
         {
             ui.SetActive(active);
         }
+        if (!active)
+            text.color = Color.clear;
     }
 }

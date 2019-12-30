@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PostSNS : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PostSNS : MonoBehaviour
     /// </summary>
     public void OnPostTwitter()
     {
+        SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
         StartCoroutine(TakeCapture());
     }
 
@@ -38,12 +40,25 @@ public class PostSNS : MonoBehaviour
     {
         yield return Screenshot.CoWriteFileProcess();
         SocialWorker.PostTwitter(message, url, imagePath, onResult);
+
         void onResult(string message)
         {
             Debug.Log(message);
-            if(message.Equals("ERROR"))
-            {// Twitterのクライアントが存在しないダイアログを出す
+            SceneManager.UnloadSceneAsync("Loading");
 
+            if (message.Equals("ERROR"))
+            {// Twitterのクライアントが存在しないダイアログを出す
+                ModalPanel.Instance().MessageBox(
+                    null,
+                    "Error",
+                    "Twitterのアプリがインストールされていません",
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    "OK"
+                    );
             }
         }
     }

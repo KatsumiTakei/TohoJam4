@@ -10,7 +10,7 @@ public class GoogleAds : MonoBehaviour
         string testId = "ca-app-pub-3940256099942544~3347511713";
         string appId = "ca-app-pub-6577425048094658~1886457194";
 
-        MobileAds.Initialize(testId);
+        MobileAds.Initialize(appId);
 
 #if UNITY_ANDROID
         string adTestId = "ca-app-pub-3940256099942544/6300978111";
@@ -21,11 +21,11 @@ public class GoogleAds : MonoBehaviour
         string adUnitId = "unexpected_platform";
 #endif
 
-        AdRequest request = new AdRequest.Builder().AddTestDevice("116F7024F72ABAFCE18652750E480004").Build();
+        AdRequest request = new AdRequest.Builder()/*.AddTestDevice("116F7024F72ABAFCE18652750E480004")*/.Build();
         foreach (var device in request.TestDevices)
             Debug.Log(device);
 
-        bannerView = new BannerView(adTestId, AdSize.Banner, AdPosition.Bottom);
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
         bannerView.LoadAd(request);
         bannerView.Show();

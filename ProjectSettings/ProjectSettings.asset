@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: RomanesqueFeraks
-  productName: rotarepO-esreveR
+  companyName: Romafuri
+  productName: rotarepOesreveR
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 0
-  bundleVersion: 3b61eacb3883bd3296d67e587365196f97f8210f
+  bundleVersion: 6c25ec903b44c6537dd87c16d3a961a020d984fc
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -164,10 +164,10 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.RomanesqueFeraks.rotarepOesreveR
+    Android: com.Romafuri.rotarepOesreveR
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 37
+  AndroidBundleVersionCode: 58
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 28
   AndroidPreferredInstallLocation: 1
@@ -263,7 +263,7 @@ PlayerSettings:
   AndroidKeystoreName: '{inproject}: tohojam4.keystore'
   AndroidKeyaliasName: android.romanesqueferaks.com
   AndroidBuildApkPerCpuArchitecture: 0
-  AndroidTVCompatibility: 1
+  AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1

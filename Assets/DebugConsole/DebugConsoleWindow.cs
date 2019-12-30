@@ -45,9 +45,9 @@ public class DebugConsoleWindow : MonoBehaviour
 	/// </summary>
 	private void InitSingleton()
 	{
-		// 他のGameObjectにアタッチされているか調べる
-		// アタッチされている場合は破棄する
-		if( this != Instance )
+        // 他のGameObjectにアタッチされているか調べる
+        // アタッチされている場合は破棄する
+        if ( this != Instance )
 		{
 			Destroy( this );
 			Debug.LogError(
