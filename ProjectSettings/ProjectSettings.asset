@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 0
-  bundleVersion: 6c25ec903b44c6537dd87c16d3a961a020d984fc
+  bundleVersion: c6f34b02f27cfa84d48c0c9f4cb2a89ebd361b5a
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -167,7 +167,7 @@ PlayerSettings:
     Android: com.Romafuri.rotarepOesreveR
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 58
+  AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 28
   AndroidPreferredInstallLocation: 1

@@ -3,6 +3,9 @@ using GoogleMobileAds.Api;
 
 public class GoogleAds : MonoBehaviour
 {
+    [SerializeField]
+    bool isTest = false;
+
     BannerView bannerView = null;
 
     void Start()
@@ -21,7 +24,9 @@ public class GoogleAds : MonoBehaviour
         string adUnitId = "unexpected_platform";
 #endif
 
-        AdRequest request = new AdRequest.Builder()/*.AddTestDevice("116F7024F72ABAFCE18652750E480004")*/.Build();
+        AdRequest request = (isTest) ? 
+            new AdRequest.Builder().AddTestDevice("116F7024F72ABAFCE18652750E480004").Build() :
+            new AdRequest.Builder().Build();
         foreach (var device in request.TestDevices)
             Debug.Log(device);
 
